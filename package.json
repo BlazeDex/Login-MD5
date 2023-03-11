@@ -29,6 +29,7 @@
     "passport": "^0.6.0"
   },
   "devDependencies": {
+    "@types/express-handlebars": "^6.0.0",
     "dotenv": "^16.0.3",
     "nodemon": "^2.0.21",
     "npm-check-updates": "^16.7.12"
