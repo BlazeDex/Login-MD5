@@ -26,11 +26,13 @@
     "md5": "^2.3.0",
     "method-override": "^3.0.0",
     "mongoose": "^7.0.1",
+    "morgan": "^1.10.0",
     "passport": "^0.6.0"
   },
   "devDependencies": {
     "@types/express-handlebars": "^6.0.0",
     "dotenv": "^16.0.3",
+    "handlebars": "^4.5.0",
     "nodemon": "^2.0.21",
     "npm-check-updates": "^16.7.12"
   }
