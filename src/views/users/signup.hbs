@@ -5,7 +5,7 @@
                 Account Register
             </div>
             <div class="card-body">
-                <form action="/users/signup" method="POST">
+                <form action="/users/signup" method="POST" onsubmit="encryptPassword()">
                     <div class="form-group">
                         <input type="text" class="form-control" name="name" placeholder="Name" value="{{name}}">
                     </div>
@@ -13,10 +13,10 @@
                         <input type="email" class="form-control" name="email" placeholder="E-mail" value="{{email}}">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" name="password" placeholder="Password" value="{{password}}">
+                        <input type="password" class="form-control" id="pass" name="password" placeholder="Password" value="{{password}}">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" name="confirm_password" placeholder="Confirm password" value="{{confirm_password}}">
+                        <input type="password" class="form-control" id="confPass" name="confirm_password" placeholder="Confirm password" value="{{confirm_password}}">
                     </div>
                     <button class="btn btn-primary btn-block">
                         Sign Up
@@ -25,4 +25,15 @@
             </div>
         </div>
     </div>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+        <script>
+            function encryptPassword() {
+            const password = document.getElementById("pass").value;
+            const confirmPassword = document.getElementById("confPass").value;
+            const hash = CryptoJS.MD5(password).toString();
+            const hash2 = CryptoJS.MD5(confirmPassword).toString();
+            document.getElementById("pass").value = hash;
+            document.getElementById("confPass").value = hash2;
+            }
+        </script> 
 </div>

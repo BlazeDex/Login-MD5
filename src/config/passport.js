@@ -5,7 +5,7 @@ const User = require('../models/User');
 
 passport.use(new LocalStrategy({
     usernameField: 'email',
-    passwordFiels: 'password'
+    passwordField: 'password'
 }, async (email, password, done) => {
 
     //Confirmar que el correo existe.

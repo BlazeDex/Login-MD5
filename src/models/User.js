@@ -9,13 +9,13 @@ const UserSchema= new Schema({
     timestamps: true
 });
 
-UserSchema.methods.encryptPassword = async function (password) {
-    return await md5(password);
+UserSchema.methods.encryptPassword = function (password) {
+    return password;
 };
 
 UserSchema.methods.matchPassword = async function (password) {
     const encryptPassword = this.password;
-    const hashedPassword = md5(password);
+    const hashedPassword = password;
     return await encryptPassword === hashedPassword;
 }
 
