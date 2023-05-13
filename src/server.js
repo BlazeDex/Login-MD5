@@ -12,13 +12,16 @@ const app = express();
 require('./config/passport');
 
 // Configuraciones
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 80);
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.hbs', exphbs.engine({
     defaultLayout: 'main',
     layoutsDir: path.join(app.get('views'), 'layouts'),
     partialsDir: path.join(app.get('views'), 'partials'),
-    extname: '.hbs'
+    extname: '.hbs',
+    runtimeOptions: {
+        noEscape: true
+    }
 }));
 app.set("view engine", ".hbs");
 
@@ -33,14 +36,15 @@ app.use(session({
     saveUninitialized: true
 }));
 app.use(passport.initialize());
-app.use(passport.session())
+app.use(passport.session());
 app.use(flash());
 
 // Variables globales
 app.use((req, res, next) => {
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
-    res.locals.error = req.flash('error');
+    res.locals.error = req.flash('error');    
+    res.locals.user = req.user || null;  
     next();
 });
 
@@ -48,6 +52,9 @@ app.use((req, res, next) => {
 app.use(require('./routes/index.routes'));
 app.use(require('./routes/notes.routes'));
 app.use(require('./routes/users.routes'));
+app.use(require('./routes/professors.routes'));
+app.use(require('./routes/faculties.routes'));
+app.use(require('./routes/subjects.routes'));
 
 // Static files
 app.use(express.static(path.join(__dirname, 'public')));

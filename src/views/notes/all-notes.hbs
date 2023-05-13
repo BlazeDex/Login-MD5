@@ -1,20 +1,52 @@
+<div class="d-flex justify-content-end">
+   <form action="/notes/search" method="POST" class="mb-3">
+    <div class="input-group">
+        <input type="text" name="search" class="form-control" placeholder="Search notes">
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </div>
+</form>
+</div>
 <div class="row">
     {{#each notes}}
-        <div class="col md-3">
-            <div class="card">
+        <div class="col md-3 mb-5 justify-content-between align-items-center">
+            <div class="card" style="width: 300px;">
                 <div class="card-body">
-                    <h4 class="card-title d-flex justify-content-between align-items-center">
-                        {{title}} <a href="notes/edit/{{_id}}"><i class="fa fa-pencil"></i></a>
-                    </h4>
-                    <p>{{description}}</p>
+                    <h4 class="card-title d-flex justify-content-between align-items-center">                       
+                        <span class="card-text-truncate">{{title}}</span> <a href="notes/edit/{{_id}}"><i class="fa fa-pencil"></i></a>                       
+                    </h4>        
+                    <p class="card-text card-text-truncate">{{description}}</p>
                     <form action="/notes/delete/{{_id}}?_method=DELETE" method="POST">
                         <input type="hidden" name="_method" value="DELETE">
-                        <button type="submit" class="btn btn-danger btn-block btn-sm">
-                            Delete
-                        </button>
+                            <button type="submit" class="btn btn-danger btn-block btn-sm">
+                                Delete
+                            </button>
                     </form>
                 </div>
             </div>
-        </div>
-    {{/each}}
+        </div>          
+    {{/each}}       
+    {{!-- {{#each notes}}    
+        {{#if this}}
+            {{#unless @first}}
+                <div class="col md-3 mb-5 justify-content-between align-items-center">
+                    <div class="card" style="width: 300px;">
+                        <div class="card-body">
+                            <h4 class="card-title d-flex justify-content-between align-items-center">                       
+                                <span class="card-text-truncate">{{title}}</span> <a href="notes/edit/{{_id}}"><i class="fa fa-pencil"></i></a>                       
+                            </h4>
+                            <p class="card-text card-text-truncate">{{description}}</p>
+                            <form action="/notes/delete/{{_id}}?_method=DELETE" method="POST">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-danger btn-block btn-sm">
+                                    Delete
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {{/unless}}
+        {{/if}}        
+    {{/each}} --}}
 </div>

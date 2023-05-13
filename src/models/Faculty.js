@@ -1,7 +1,7 @@
 const {Schema, model} = require('mongoose');
 
-const NoteSchema = new Schema({
-   title:  {
+const FacultySchema = new Schema({
+   name:  {
         type: String,
         required: true    
     },
@@ -9,12 +9,12 @@ const NoteSchema = new Schema({
         type: String,
         required: true
     },
-    user: {
-        type: String,
+    duration: {
+        type: Number,
         required: true
     }
 }, {
     timestamps: true
 });
 
-module.exports = model('Note', NoteSchema);
+module.exports = model('Faculty', FacultySchema);

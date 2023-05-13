@@ -7,23 +7,29 @@ const {
     renderNotes, 
     renderEditForm, 
     updateNotes, 
-    deleteNote
+    deleteNote,
+    searchNotes
 } = require('../controllers/notes.controller');
 
-// Nueva nota.
-router.get('/notes/add', renderNoteForm);
+const {isAuthenticated, justProfessor} = require('../helpers/auth')
 
-router.post('/notes/new-note', createNewNote);
+// Nueva nota.
+router.get('/notes/add', isAuthenticated, justProfessor, renderNoteForm);
+
+router.post('/notes/new-note', isAuthenticated, justProfessor, createNewNote);
 
 // Obtener todas las notas.
-router.get('/notes', renderNotes);
+router.get('/notes', isAuthenticated, renderNotes);
+
+// Obtener notas buscadas.
+router.post('/notes/search', isAuthenticated, searchNotes);
 
 // Editar notas.
-router.get('/notes/edit/:id', renderEditForm);
+router.get('/notes/edit/:id', isAuthenticated, renderEditForm);
 
-router.put('/notes/edit/:id', updateNotes);
+router.put('/notes/edit/:id', isAuthenticated, updateNotes);
 
 // Eliminar notas.
-router.delete('/notes/delete/:id', deleteNote);
+router.delete('/notes/delete/:id', isAuthenticated, deleteNote);
 
 module.exports = router;

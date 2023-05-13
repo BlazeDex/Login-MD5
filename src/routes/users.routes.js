@@ -9,11 +9,13 @@ const {
     logout
 }= require('../controllers/users.controller')
 
-router.get('/users/signup', renderSingUpForm);
-router.post('/users/signup', signup);
+const {isLoggedIn} = require('../helpers/auth')
 
-router.get('/users/signin', renderSingInForm);
-router.post('/users/signin', signin);
+router.get('/users/signup', isLoggedIn, renderSingUpForm);
+router.post('/users/signup', isLoggedIn, signup);
+
+router.get('/users/signin', isLoggedIn, renderSingInForm);
+router.post('/users/signin', isLoggedIn, signin);
 
 router.get('/users/logout', logout);
 
