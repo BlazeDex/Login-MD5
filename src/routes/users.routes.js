@@ -1,15 +1,15 @@
-const { Router } = require('express');
+const {Router} = require('express');
 const router = Router();
 
 const {
-    renderSingUpForm,
-    renderSingInForm,
-    signup,
-    signin,
-    logout
-}= require('../controllers/users.controller')
+  renderSingUpForm,
+  renderSingInForm,
+  signup,
+  signin,
+  logout,
+}= require('../controllers/users.controller');
 
-const {isLoggedIn} = require('../helpers/auth')
+const {isLoggedIn} = require('../helpers/auth');
 
 router.get('/users/signup', isLoggedIn, renderSingUpForm);
 router.post('/users/signup', isLoggedIn, signup);

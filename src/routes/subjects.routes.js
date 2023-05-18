@@ -1,14 +1,14 @@
-const { Router } = require('express');
+const {Router} = require('express');
 const router = Router();
 
-const { 
-    renderSubjectForm, 
-    createNewSubject, 
-    renderSubjects, 
-    renderEditForm, 
-    updateSubjects, 
-    deleteSubject,
-    searchSubjects
+const {
+  renderSubjectForm,
+  createNewSubject,
+  renderSubjects,
+  renderEditForm,
+  updateSubjects,
+  deleteSubject,
+  searchSubjects,
 } = require('../controllers/subjects.controller');
 
 const {isAuthenticated, justAdmin} = require('../helpers/auth');

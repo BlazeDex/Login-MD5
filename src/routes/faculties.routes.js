@@ -1,17 +1,17 @@
-const { Router } = require('express');
+const {Router} = require('express');
 const router = Router();
 
-const { 
-    renderFacultyForm, 
-    createNewFaculty, 
-    renderFaculties, 
-    renderEditForm, 
-    updateFaculties, 
-    deleteFaculty,
-    searchFaculties
+const {
+  renderFacultyForm,
+  createNewFaculty,
+  renderFaculties,
+  renderEditForm,
+  updateFaculties,
+  deleteFaculty,
+  searchFaculties,
 } = require('../controllers/faculties.controller');
 
-const {isAuthenticated, justAdmin} = require('../helpers/auth')
+const {isAuthenticated, justAdmin} = require('../helpers/auth');
 
 // Nueva nota.
 router.get('/faculties/add', isAuthenticated, justAdmin, renderFacultyForm);

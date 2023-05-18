@@ -3,45 +3,45 @@ const facultiesCtrl = {};
 const Faculty = require('../models/Faculty');
 
 facultiesCtrl.renderFacultyForm = (req, res) => {
-    res.render('faculties/new-faculty');
+  res.render('faculties/new-faculty');
 };
 
 facultiesCtrl.createNewFaculty = async (req, res) => {
-    const {name, description, duration} = req.body;
-    const newFaculty = new Faculty({name , description, duration});
-    await newFaculty.save();
-    req.flash('success_msg', 'Faculty added succesfully');
-    res.redirect('/faculties');
+  const {name, description, duration} = req.body;
+  const newFaculty = new Faculty({name, description, duration});
+  await newFaculty.save();
+  req.flash('success_msg', 'Faculty added succesfully');
+  res.redirect('/faculties');
 };
 
 facultiesCtrl.renderFaculties = async (req, res) => {
-    const faculties = await Faculty.find().lean();
-    res.render('faculties/all-faculties', { faculties });
-}
+  const faculties = await Faculty.find().lean();
+  res.render('faculties/all-faculties', {faculties});
+};
 
 facultiesCtrl.renderEditForm = async (req, res) => {
-   const faculty = await Faculty.findById(req.params.id).lean();   
-   res.render('faculties/edit-faculty', { faculty });
-}
+  const faculty = await Faculty.findById(req.params.id).lean();
+  res.render('faculties/edit-faculty', {faculty});
+};
 
 facultiesCtrl.updateFaculties = async (req, res) => {
-    const {name, description, duration} = req.body;
-    await Faculty.findByIdAndUpdate(req.params.id, {name, description, duration});
-    req.flash('success_msg', 'Faculty updated successfully');
-    res.redirect('/faculties');
-}
+  const {name, description, duration} = req.body;
+  await Faculty.findByIdAndUpdate(req.params.id, {name, description, duration});
+  req.flash('success_msg', 'Faculty updated successfully');
+  res.redirect('/faculties');
+};
 
 facultiesCtrl.deleteFaculty = async (req, res) => {
-    await Faculty.findByIdAndDelete(req.params.id); 
-    req.flash('success_msg', 'Faculty deleted successfully');
-    res.redirect('/faculties');
-}
+  await Faculty.findByIdAndDelete(req.params.id);
+  req.flash('success_msg', 'Faculty deleted successfully');
+  res.redirect('/faculties');
+};
 
 facultiesCtrl.searchFaculties = async (req, res) => {
-    const { search } = req.body;
-    const query = { name: { $regex: search, $options: 'i' } };
-    const faculties = await Faculty.find(query).lean();
-    res.render('faculties/all-faculties', { faculties });    
+  const {search} = req.body;
+  const query = {name: {$regex: search, $options: 'i'}};
+  const faculties = await Faculty.find(query).lean();
+  res.render('faculties/all-faculties', {faculties});
 };
 
 module.exports = facultiesCtrl;

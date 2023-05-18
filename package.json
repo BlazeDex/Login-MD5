@@ -34,6 +34,7 @@
     "@types/express-handlebars": "^6.0.0",
     "dotenv": "^16.0.3",
     "eslint": "^7.32.0",
+    "eslint-config-google": "^0.14.0",
     "handlebars": "^4.5.0",
     "nodemon": "^2.0.21",
     "npm-check-updates": "^16.7.12"

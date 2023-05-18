@@ -1,15 +1,15 @@
-const { Router } = require('express');
+const {Router} = require('express');
 const router = Router();
 
 const {
-    renderSingUpForm,
-    renderSingInForm,
-    signup,
-    signin,
-    logout
-}= require('../controllers/professors.controller')
+  renderSingUpForm,
+  renderSingInForm,
+  signup,
+  signin,
+  logout,
+}= require('../controllers/professors.controller');
 
-const {isLoggedIn} = require('../helpers/auth')
+const {isLoggedIn} = require('../helpers/auth');
 
 router.get('/professors/signup', isLoggedIn, renderSingUpForm);
 router.post('/professors/signup', isLoggedIn, signup);
