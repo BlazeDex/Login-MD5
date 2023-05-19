@@ -11,13 +11,13 @@ passport.use('user-local', new LocalStrategy({
 }, async (email, password, done) => {
   const user = await User.findOne({email});
   if (!user) {
-    return done(null, false, {message: 'Not user found.'});
+    return done(null, false, {message: 'El correo que ingresaste no está registrado.'});
   } else {
     const match = await user.matchPassword(password);
     if (match) {
       return done(null, user);
     } else {
-      return done(null, false, {message: 'Incorrect password.'});
+      return done(null, false, {message: 'Contraseña incorrecta.'});
     }
   }
 }));
@@ -29,13 +29,13 @@ passport.use('professor-local', new LocalStrategy({
 }, async (email, password, done) => {
   const professor = await Professor.findOne({email});
   if (!professor) {
-    return done(null, false, {message: 'Not professor found.'});
+    return done(null, false, {message: 'El correo que ingresaste no está registrado.'});
   } else {
     const match = await professor.matchPassword(password);
     if (match) {
       return done(null, professor);
     } else {
-      return done(null, false, {message: 'Incorrect password.'});
+      return done(null, false, {message: 'Contraseña incorrecta.'});
     }
   }
 }));

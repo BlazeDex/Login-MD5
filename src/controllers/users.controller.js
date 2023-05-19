@@ -10,10 +10,10 @@ userCtrl.signup = async (req, res) => {
   const errors = [];
   const {name, lastName, email, password, confirm_password} = req.body;
   if (password != confirm_password) {
-    errors.push({text: `Passwords don't match.`});
+    errors.push({text: `Las contraseñas no coinciden.`});
   }
   if (password.length < 6) {
-    errors.push({text: 'Passwords must be at least 6 characters.'});
+    errors.push({text: 'La contraseña no debe contener menos de 6 caracteres.'});
   }
   if (errors.length > 0) {
     res.render('users/signup', {
@@ -27,12 +27,12 @@ userCtrl.signup = async (req, res) => {
   } else {
     const emailUser = await User.findOne({email: email});
     if (emailUser) {
-      req.flash('error_msg', 'The E-mail is already in use.');
+      req.flash('error_msg', 'El correo electrónico que ingresaste ya está en uso.');
       res.redirect('/users/signup');
     } else {
       const newUser = new User({name, lastName, email, password});
       await newUser.save();
-      req.flash('success_msg', `You're registered`);
+      req.flash('success_msg', `Ingresa las credenciales de tu cuenta.`);
       res.redirect('/users/signin');
     }
   }
@@ -53,7 +53,7 @@ userCtrl.logout = (req, res) => {
     if (err) {
       return next(err);
     }
-    req.flash( 'success_msg', 'You\'re logged out now.' );
+    req.flash( 'success_msg', 'Has cerrado sesión.' );
     res.redirect( '/users/signin' );
   });
 };

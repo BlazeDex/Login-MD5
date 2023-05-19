@@ -5,7 +5,7 @@
                Registro de cuenta
             </div>
             <div class="card-body">
-                <form action="/users/signup" method="POST" onsubmit="encryptPassword()">
+                <form id="signUpForm" action="/users/signup" method="POST" onsubmit="validateData()">
                     <div class="form-group">
                         <input type="text" class="form-control" name="name" placeholder="Name" value="{{name}}">
                     </div>
@@ -28,15 +28,60 @@
             </div>
         </div>
     </div>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         <script>
             function encryptPassword() {
-            const password = document.getElementById("pass").value;
-            const confirmPassword = document.getElementById("confPass").value;
-            const hash = CryptoJS.MD5(password).toString();
-            const hash2 = CryptoJS.MD5(confirmPassword).toString();
-            document.getElementById("pass").value = hash;
-            document.getElementById("confPass").value = hash2;
-            }
+                const password = document.getElementById("pass").value;
+                const confirmPassword = document.getElementById("confPass").value;
+                const hash = CryptoJS.MD5(password).toString();
+                const hash2 = CryptoJS.MD5(confirmPassword).toString();
+                document.getElementById("pass").value = hash;
+                document.getElementById("confPass").value = hash2;
+            };
+
+            function validateData() {
+                const name = document.querySelector('input[name="name"]');
+                const lastName = document.querySelector('input[name="lastName"]');
+                const email = document.querySelector('input[name="email"]');
+                const password = document.querySelector('input[name="password"]');
+                const confPassword = document.querySelector('input[name="confirm_password"]');
+
+                const name2 = name.value.trim();
+                const lastName2 = lastName.value.trim();
+                const email2 = email.value.trim();
+                const password2 = password.value.trim();
+                const confPassword2 = confPassword.value.trim();
+
+                if(!name2 || !lastName2 || !email2 || !password2 || !confPassword2) {
+                    event.preventDefault();
+                    Swal.fire('Error', 'Ingresa los datos que se solicitan.', 'error');
+                } else if(password2.length < 6 || confPassword2.length < 6) {
+                    event.preventDefault();
+                    Swal.fire('Error', 'La contraseña debe tener más de 6 caracteres.', 'error');
+                } else if(password2 !== confPassword2) {
+                    event.preventDefault();
+                    Swal.fire('Error', 'La contraseñas no coinciden.', 'error');
+                } else {
+                    validateEmail();
+                }                
+            };
+            
+            function validateEmail() {
+                const emailInput = document.querySelector('input[name="email"]');
+                const email = emailInput.value;
+                const regex = /@\ucol\.mx$/;
+
+                if (regex.test(email)) {
+                    // El correo electrónico es válido.
+                    encryptPassword();
+                    return true;
+                    } else {
+                    // El correo electrónico no es válido
+                    event.preventDefault();
+                    Swal.fire('Error', 'El correo electrónico debe tener el dominio @ucol.mx.', 'error');
+                    return false;
+                }
+            };
         </script> 
 </div>

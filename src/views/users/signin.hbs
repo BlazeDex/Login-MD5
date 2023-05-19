@@ -5,7 +5,7 @@
                 Inicio de sesión de cuenta
             </div>
             <div class="card-body">
-                <form action="/users/signin" method="POST" onsubmit="encryptPassword()">                
+                <form action="/users/signin" method="POST" onsubmit="validateData()">                
                     <div class="form-group">
                         <input type="email" class="form-control" name="email" placeholder="E-mail">
                     </div>
@@ -20,11 +20,27 @@
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
+        function validateData() {
+            const email = document.querySelector('input[name="email"]');
+            const password = document.querySelector('input[name="password"]');
+               
+            const email2 = email.value.trim();
+            const password2 = password.value.trim();
+
+            if(!email2 || !password2 ) {
+                event.preventDefault();
+                Swal.fire('Error', 'Ingresa los datos que se solicitan.', 'error');
+            } else {
+                encryptPassword();
+            }                
+        };
+
         function encryptPassword() {
-        const password = document.getElementById("pass").value;
-        const hash = CryptoJS.MD5(password).toString();
-        document.getElementById("pass").value = hash;
+            const password = document.getElementById("pass").value;
+            const hash = CryptoJS.MD5(password).toString();
+            document.getElementById("pass").value = hash;
         }
-    </script>    
+    </script>   
 </div>

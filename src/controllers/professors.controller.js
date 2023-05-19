@@ -10,10 +10,10 @@ professorCtrl.signup = async (req, res) => {
   const errors = [];
   const {name, lastName, email, password, confirm_password} = req.body;
   if (password != confirm_password) {
-    errors.push({text: `Passwords don't match.`});
+    errors.push({text: `Las contraseñas no coniciden.`});
   }
   if (password.length < 6) {
-    errors.push({text: 'Passwords must be at least 6 characters.'});
+    errors.push({text: 'La contraseña debe contener al menos 6 caracteres.'});
   }
   if (errors.length > 0) {
     res.render('professors/p-signup', {
@@ -27,12 +27,12 @@ professorCtrl.signup = async (req, res) => {
   } else {
     const emailProfessor = await Professor.findOne({email: email});
     if (emailProfessor) {
-      req.flash('error_msg', 'The E-mail is already in use.');
+      req.flash('error_msg', 'El correo electrónico que ingresaste ya está en uso.');
       res.redirect('/professors/signup');
     } else {
       const newProfessor = new Professor({name, lastName, email, password});
       await newProfessor.save();
-      req.flash('success_msg', `You're registered`);
+      req.flash('success_msg', `Ingresa las credenciales de tu cuenta.`);
       res.redirect('/professors/signin');
     }
   }
@@ -76,7 +76,7 @@ professorCtrl.logout = (req, res) => {
     if (err) {
       return next(err);
     }
-    req.flash( 'success_msg', 'You\'re logged out now.' );
+    req.flash( 'success_msg', 'Has cerrado sesión.' );
     res.redirect( '/professors/signin' );
   });
 };

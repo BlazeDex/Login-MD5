@@ -10,7 +10,7 @@ facultiesCtrl.createNewFaculty = async (req, res) => {
   const {name, description, duration} = req.body;
   const newFaculty = new Faculty({name, description, duration});
   await newFaculty.save();
-  req.flash('success_msg', 'Faculty added succesfully');
+  req.flash('success_msg', '¡Facultad añadida correctamente!');
   res.redirect('/faculties');
 };
 
@@ -27,13 +27,13 @@ facultiesCtrl.renderEditForm = async (req, res) => {
 facultiesCtrl.updateFaculties = async (req, res) => {
   const {name, description, duration} = req.body;
   await Faculty.findByIdAndUpdate(req.params.id, {name, description, duration});
-  req.flash('success_msg', 'Faculty updated successfully');
+  req.flash('success_msg', '¡Los datos de la facultad se han actualizado!');
   res.redirect('/faculties');
 };
 
 facultiesCtrl.deleteFaculty = async (req, res) => {
   await Faculty.findByIdAndDelete(req.params.id);
-  req.flash('success_msg', 'Faculty deleted successfully');
+  req.flash('success_msg', '¡Se ha eliminado la facultad!');
   res.redirect('/faculties');
 };
 

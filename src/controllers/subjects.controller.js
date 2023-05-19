@@ -10,7 +10,7 @@ subjectsCtrl.createNewSubject = async (req, res) => {
   const {name, description, hours} = req.body;
   const newSubject = new Subject({name, description, hours});
   await newSubject.save();
-  req.flash('success_msg', 'Subject added succesfully');
+  req.flash('success_msg', '¡Asignatura creada correctamente!');
   res.redirect('/subjects');
 };
 
@@ -27,13 +27,13 @@ subjectsCtrl.renderEditForm = async (req, res) => {
 subjectsCtrl.updateSubjects = async (req, res) => {
   const {name, description, hours} = req.body;
   await Subject.findByIdAndUpdate(req.params.id, {name, description, hours});
-  req.flash('success_msg', 'Subject updated successfully');
+  req.flash('success_msg', '¡Asignatura actualizada correctamente!');
   res.redirect('/subjects');
 };
 
 subjectsCtrl.deleteSubject = async (req, res) => {
   await Subject.findByIdAndDelete(req.params.id);
-  req.flash('success_msg', 'Subject deleted successfully');
+  req.flash('success_msg', '¡Se ha eliminado la asignatura correctamente!');
   res.redirect('/subjects');
 };
 
