@@ -11,7 +11,44 @@
     </div>
 </form>
 </div>
-<div class="row">
+<div class="container">
+    <h1>Asignaturas</h1>
+    <table class="table mt-2">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Horas a la semana</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each subjects}}
+          <tr>
+            <td>{{_id}}</td>
+            <td>{{name}}</td>
+            <td>{{description}}</td>
+            <td>{{hours}}</td>
+            <td>
+                <a href="subjects/edit/{{_id}}" class="btn btn-primary btn-block btn-sm">Editar</a>
+            </td>
+            <td>
+                <form action="/subjects/delete/{{_id}}?_method=DELETE" method="POST">
+                        <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn btn-danger btn-block btn-sm">
+                                Eliminar
+                            </button>
+                </form>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
+{{!-- <div class="row">
     {{#each subjects}}
         <div class="col md-3 mb-5 justify-content-between align-items-center">
             <div class="card" style="width: 300px;">
@@ -30,4 +67,4 @@
             </div>
         </div>          
     {{/each}}  
-</div>
+</div> --}}

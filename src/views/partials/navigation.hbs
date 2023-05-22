@@ -1,13 +1,13 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
  <div class="container">
-     <a class="navbar-brand" href="/">Notes App</a>
+     <a class="navbar-brand" href="/">UNA CIERTA UNIVERSIDAD</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="/about">About</a>
+      <a class="nav-item nav-link" href="/about">Sobre nosotros<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="/information">Más información</a>
     </div>
     <div class="navbar-nav ml-auto">      
       {{#if user}}
@@ -17,9 +17,12 @@
               {{#if isAdmin}}
                 <div class="dropdown">
                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Hola, admin {{name}}
+                      Hola, {{name}}
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="/notes">Notas</a>
+                      <a class="dropdown-item" href="/users">Alumnos</a>
+                      <a class="dropdown-item" href="/professors">Profesores</a>  
                       <a class="dropdown-item" href="/faculties">Facultades</a>
                       <a class="dropdown-item" href="/subjects">Asignaturas</a>
                       <div class="dropdown-divider"></div>
@@ -30,7 +33,7 @@
                     {{#if isProfessor}}
                     <div class="dropdown">
                       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Hola, profesor {{name}}
+                          Bienvenido, {{name}}
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                           <a class="dropdown-item" href="/notes">Todas las notas</a>
@@ -42,11 +45,10 @@
                   {{else}}
                   <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Bienvenido, {{name}}.
+                      {{name}}
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="/notes">Todas las notas</a>
-                        <a class="dropdown-item" href="/notes/add">Añadir nota</a>
+                        <a class="dropdown-item" href="/notes">Ver notas</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/users/logout">Cerrar sesión</a>
                     </div>

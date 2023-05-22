@@ -1,11 +1,13 @@
 const {Router} = require('express');
 const router = Router();
 
-const {renderIndex, renderAbout, renderSignInSelector, renderSignUpSelector} = require('../controllers/index.controller');
+const {renderIndex, renderAbout, renderInformation, renderSignInSelector, renderSignUpSelector} = require('../controllers/index.controller');
 
 router.get('/', renderIndex);
 
 router.get('/about', renderAbout);
+
+router.get('/information', renderInformation);
 
 router.get('/signin-selector', renderSignInSelector);
 

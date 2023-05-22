@@ -70,6 +70,33 @@ professorCtrl.signin = (req, res, next) => {
   })(req, res, next);
 };
 
+professorCtrl.renderProfessors = async (req, res) => {
+  const professors = await Professor.find({isAdmin: false}).lean();
+  res.render('professors/all-professors', {professors});
+};
+
+professorCtrl.deleteProfessor = async (req, res) => {
+  await Professor.findByIdAndDelete(req.params.id);
+  req.flash('success_msg', '¡Se ha eliminado al profesor!');
+  res.redirect('/professors');
+};
+
+professorCtrl.searchProfessors = async (req, res) => {
+  const { search } = req.body;
+  const query = {
+    $and: [
+      { isAdmin: false },
+      {
+        $or: [
+          { name: { $regex: search, $options: 'i' } },
+          { lastName: { $regex: search, $options: 'i' } }
+        ]
+      }
+    ]
+  };
+  const professors = await Professor.find(query).lean();
+  res.render('professors/all-professors', { professors });
+};
 
 professorCtrl.logout = (req, res) => {
   req.logout( (err) => {

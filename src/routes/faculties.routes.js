@@ -11,25 +11,25 @@ const {
   searchFaculties,
 } = require('../controllers/faculties.controller');
 
-const {isAuthenticated, justAdmin} = require('../helpers/auth');
+const {isAuthenticated, onlyAdmin} = require('../helpers/auth');
 
 // Nueva nota.
-router.get('/faculties/add', isAuthenticated, justAdmin, renderFacultyForm);
+router.get('/faculties/add', isAuthenticated, onlyAdmin, renderFacultyForm);
 
-router.post('/faculties/new-faculty', isAuthenticated, justAdmin, createNewFaculty);
+router.post('/faculties/new-faculty', isAuthenticated, onlyAdmin, createNewFaculty);
 
 // Obtener todas las notas.
-router.get('/faculties', isAuthenticated, justAdmin, renderFaculties);
+router.get('/faculties', isAuthenticated, onlyAdmin, renderFaculties);
 
 // Obtener notas buscadas.
-router.post('/faculties/search', isAuthenticated, justAdmin, searchFaculties);
+router.post('/faculties/search', isAuthenticated, onlyAdmin, searchFaculties);
 
 // Editar notas.
-router.get('/faculties/edit/:id', isAuthenticated, justAdmin, renderEditForm);
+router.get('/faculties/edit/:id', isAuthenticated, onlyAdmin, renderEditForm);
 
-router.put('/faculties/edit/:id', isAuthenticated, justAdmin, updateFaculties);
+router.put('/faculties/edit/:id', isAuthenticated, onlyAdmin, updateFaculties);
 
 // Eliminar notas.
-router.delete('/faculties/delete/:id', isAuthenticated, justAdmin, deleteFaculty);
+router.delete('/faculties/delete/:id', isAuthenticated, onlyAdmin, deleteFaculty);
 
 module.exports = router;

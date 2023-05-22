@@ -48,6 +48,29 @@ userCtrl.signin = passport.authenticate('user-local', {
   failureFlash: true,
 });
 
+userCtrl.renderUsers = async (req, res) => {
+  const users = await User.find().lean();
+  res.render('users/all-users', {users});
+};
+
+userCtrl.searchUsers = async (req, res) => {
+  const { search } = req.body;
+  const query = {
+    $or: [
+      { name: { $regex: search, $options: 'i' } },
+      { lastName: { $regex: search, $options: 'i' } }
+    ]
+  };
+  const users = await User.find(query).lean();
+  res.render('users/all-users', { users });
+};
+
+userCtrl.deleteUser = async (req, res) => {
+  await User.findByIdAndDelete(req.params.id);
+  req.flash('success_msg', '¡Se ha eliminado al alumno!');
+  res.redirect('/users');
+};
+
 userCtrl.logout = (req, res) => {
   req.logout( (err) => {
     if (err) {

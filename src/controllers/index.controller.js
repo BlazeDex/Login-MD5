@@ -8,6 +8,10 @@ indexCtrl.renderAbout = (req, res) => {
   res.render('about');
 };
 
+indexCtrl.renderInformation = (req, res) => {
+  res.render('information');
+};
+
 indexCtrl.renderSignInSelector = (req, res) => {
   res.render('signin-selector');
 };

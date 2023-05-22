@@ -1,0 +1,14 @@
+<div class="jumbotron mt-4">
+{{#each user}}
+  {{#if this}}
+    {{#unless @first}}
+      {{name}}
+    {{/unless}}
+  {{/if}}
+{{/each}}
+    <h1 class="display-4">Información sobre el proyecto.</h1>
+    <p>Sistema universitario construido en NodeJS y una conexión a MongoDB Atlas, el cual implementa un login seguro, mediante la encriptación MD5.</p>
+    <hr class="my-4">
+    <p>Realizado por Alan Hernández y Gustavo Higuera || 6°G.</p>
+    <a  target="_blank" href="https://github.com/BlazeDex/Login-MD5" class="btn btn-primary">Respositorio del proyecto</a>
+</div>

@@ -1,10 +1,7 @@
-<div class="div">
-   <a href="/faculties/add" class="btn btn-primary float-left">Agregar nueva facultad</a>
-</div>
 <div class="d-flex justify-content-end">
-   <form action="/faculties/search" method="POST" class="mb-3">
+   <form action="/professors/search" method="POST" class="mb-3">
         <div class="input-group">
-            <input type="text" name="search" class="form-control" placeholder="Buscar facultades">
+            <input type="text" name="search" class="form-control" placeholder="Buscar profesores">
             <div class="input-group-append">
                 <button type="submit" class="btn btn-primary">Buscar</button>
             </div>
@@ -12,30 +9,29 @@
     </form>
 </div>
 <div class="container">
-    <h1>Facultades</h1>
+    <h1>Profesores</h1>
     <table class="table mt-2">
       <thead>
         <tr>
           <th>ID</th>
-          <th>Nombre</th>
-          <th>Descripción</th>
-          <th>Semestres</th>
-          <th></th>
+          <th>Nombre(s)</th>
+          <th>Apellidos</th>
+          <th>Correo</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        {{#each faculties}}
+        {{#each professors}}
           <tr>
             <td>{{_id}}</td>
             <td>{{name}}</td>
-            <td>{{description}}</td>
-            <td>{{duration}}</td>
+            <td>{{lastName}}</td>
+            <td>{{email}}</td>
+            {{!-- <td>
+                <a href="professors/edit/{{_id}}" class="btn btn-primary btn-block btn-sm">Editar</a>
+            </td> --}}
             <td>
-                <a href="faculties/edit/{{_id}}" class="btn btn-primary btn-block btn-sm">Editar</a>
-            </td>
-            <td>
-                <form action="/faculties/delete/{{_id}}?_method=DELETE" method="POST">
+                <form action="/professors/delete/{{_id}}?_method=DELETE" method="POST">
                         <input type="hidden" name="_method" value="DELETE">
                             <button type="submit" class="btn btn-danger btn-block btn-sm">
                                 Eliminar

@@ -11,12 +11,12 @@ const {
   searchNotes,
 } = require('../controllers/notes.controller');
 
-const {isAuthenticated, justProfessor} = require('../helpers/auth');
+const {isAuthenticated} = require('../helpers/auth');
 
 // Nueva nota.
-router.get('/notes/add', isAuthenticated, justProfessor, renderNoteForm);
+router.get('/notes/add', isAuthenticated, renderNoteForm);
 
-router.post('/notes/new-note', isAuthenticated, justProfessor, createNewNote);
+router.post('/notes/new-note', isAuthenticated, createNewNote);
 
 // Obtener todas las notas.
 router.get('/notes', isAuthenticated, renderNotes);
