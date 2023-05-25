@@ -21,6 +21,7 @@
         </form>
     </div>
 </div>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
     const subjectForm = document.getElementById('subjectForm');
     subjectForm.addEventListener('submit', function(event) {
@@ -28,9 +29,9 @@
         const descriptionInput = document.querySelector('textarea[name="description"]');
         const hoursInput = document.querySelector('input[name="hours"]');
         
-        if (titleInput.value.trim() === '' || descriptionInput.value.trim() === '' || durationInput.value.trim() === '') {
+        if (titleInput.value.trim() === '' || descriptionInput.value.trim() === '' || hoursInput.value.trim() === '') {
             event.preventDefault();
-            alert('Please fill in all fields.');
+            Swal.fire('Error', '¡Hay algunos campos vacíos!', 'error');
         }
     });
 </script>

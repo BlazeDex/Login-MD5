@@ -64,7 +64,7 @@ professorCtrl.signin = (req, res, next) => {
       if (req.user.isAdmin) {
         return res.redirect('/faculties');
       } else {
-        return res.redirect('/notes');
+        return res.redirect('/view-faculties');
       }
     });
   })(req, res, next);

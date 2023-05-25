@@ -15,6 +15,7 @@
           {{#if this}}
             {{#unless @first}}
               {{#if isAdmin}}
+                <a class="nav-item nav-link active">Cuenta de administrador</a>
                 <div class="dropdown">
                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Hola, {{name}}
@@ -31,19 +32,21 @@
                 </div>
                   {{else}}
                     {{#if isProfessor}}
+                    <a class="nav-item nav-link active">Cuenta de profesor</a>
                     <div class="dropdown">
                       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           Bienvenido, {{name}}
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="/notes">Todas las notas</a>
-                          <a class="dropdown-item" href="/notes/add">Añadir nota</a>
+                          <a class="dropdown-item" href="/notes">Notas</a>
+                          <a class="dropdown-item" href="/view-faculties">Facultades</a>
                           <div class="dropdown-divider"></div>
                           <a class="dropdown-item" href="/professors/logout">Cerrar sesión</a>
                       </div>
                     </div>   
                   {{else}}
-                  <div class="dropdown">
+                  <a class="nav-item nav-link active">Cuenta de alumno</a>
+                  <div class="dropdown">    
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       {{name}}
                     </button>

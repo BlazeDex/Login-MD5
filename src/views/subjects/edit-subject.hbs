@@ -4,16 +4,16 @@
             <h3>Editar información de la asignatura</h3>
         </div>
         <div class="card-body">
-            <form action="/subjects/edit/{{subject._id}}?_method=PUT" method="POST">
+            <form id="subjectForm" action="/subjects/edit/{{subject._id}}?_method=PUT" method="POST">
                 <input type="hidden" name="_method" value="PUT">
                 <div class="form-group">
-                    <input type="text" name="name" class="form-control" value="{{subject.name}}">
+                    <input type="text" name="name" placeholder="Nombre" class="form-control" value="{{subject.name}}">
                 </div>
                 <div class="form-group">
-                    <textarea name="description" class="form-control">{{subject.description}}</textarea>
+                    <textarea name="description" placeholder="Descripción" class="form-control">{{subject.description}}</textarea>
                 </div>
                 <div class="form-group">
-                    <input type="number" name="hours" placeholder="Hours" class="form-control" value="{{subject.hours}}">
+                    <input type="number" name="hours" placeholder="Horas" placeholder="Hours" class="form-control" value="{{subject.hours}}">
                 </div>
                 <div class="form-group">
                     <button class="btn btn-primary btn-block" type="submit">
@@ -24,3 +24,17 @@
         </div>
     </div>
 </div>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    const subjectForm = document.getElementById('subjectForm');
+    subjectForm.addEventListener('submit', function(event) {
+        const titleInput = document.querySelector('input[name="name"]');
+        const descriptionInput = document.querySelector('textarea[name="description"]');
+        const hoursInput = document.querySelector('input[name="hours"]');
+        
+        if (titleInput.value.trim() === '' || descriptionInput.value.trim() === '' || hoursInput.value.trim() === '') {
+            event.preventDefault();
+            Swal.fire('Error', '¡Hay algunos campos vacíos!', 'error');
+        }
+    });
+</script>

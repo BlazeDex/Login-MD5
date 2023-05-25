@@ -31,15 +31,31 @@
                 <a href="professors/edit/{{_id}}" class="btn btn-primary btn-block btn-sm">Editar</a>
             </td> --}}
             <td>
-                <form action="/professors/delete/{{_id}}?_method=DELETE" method="POST">
-                        <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit" class="btn btn-danger btn-block btn-sm">
-                                Eliminar
-                            </button>
-                </form>
+              <button onclick="confirmDelete('{{_id}}')" class="btn btn-danger btn-block btn-sm">Eliminar</button>
+              <form id="delete-form-{{_id}}" action="/users/delete/{{_id}}?_method=DELETE" method="POST">
+                <input type="hidden" name="_method" value="DELETE">
+              </form>
             </td>
           </tr>
         {{/each}}
       </tbody>
     </table>
   </div>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+  function confirmDelete(id) {
+    swal({
+      title: "¿Estás seguro?",
+      text: "Esta acción no se puede deshacer.",
+      icon: "warning",
+      buttons: ["Cancelar", "Eliminar"],
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        const form = document.querySelector(`#delete-form-${id}`);
+        form.submit();
+      }
+    });
+  }
+</script>

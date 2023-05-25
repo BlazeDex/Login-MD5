@@ -20,36 +20,30 @@
                         <span class="card-text-truncate">{{title}}</span> <a href="notes/edit/{{_id}}"><i class="fa fa-pencil"></i></a>                       
                     </h4>        
                     <p class="card-text card-text-truncate">{{description}}</p>
-                    <form action="/notes/delete/{{_id}}?_method=DELETE" method="POST">
-                        <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit" class="btn btn-danger btn-block btn-sm">
-                                Eliminar
-                            </button>
-                    </form>
+                    <button onclick="confirmDelete('{{_id}}')" class="btn btn-danger btn-block btn-sm">Eliminar</button>
+                        <form id="delete-form-{{_id}}" action="/notes/delete/{{_id}}?_method=DELETE" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                        </form>
                 </div>
             </div>
         </div>          
-    {{/each}}       
-    {{!-- {{#each notes}}    
-        {{#if this}}
-            {{#unless @first}}
-                <div class="col md-3 mb-5 justify-content-between align-items-center">
-                    <div class="card" style="width: 300px;">
-                        <div class="card-body">
-                            <h4 class="card-title d-flex justify-content-between align-items-center">                       
-                                <span class="card-text-truncate">{{title}}</span> <a href="notes/edit/{{_id}}"><i class="fa fa-pencil"></i></a>                       
-                            </h4>
-                            <p class="card-text card-text-truncate">{{description}}</p>
-                            <form action="/notes/delete/{{_id}}?_method=DELETE" method="POST">
-                                <input type="hidden" name="_method" value="DELETE">
-                                <button type="submit" class="btn btn-danger btn-block btn-sm">
-                                    Delete
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            {{/unless}}
-        {{/if}}        
-    {{/each}} --}}
+    {{/each}}   
 </div>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+  function confirmDelete(id) {
+    swal({
+      title: "¿Estás seguro?",
+      text: "Esta acción no se puede deshacer.",
+      icon: "warning",
+      buttons: ["Cancelar", "Eliminar"],
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        const form = document.querySelector(`#delete-form-${id}`);
+        form.submit();
+      }
+    });
+  }
+</script>

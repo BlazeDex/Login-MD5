@@ -19,6 +19,11 @@ facultiesCtrl.renderFaculties = async (req, res) => {
   res.render('faculties/all-faculties', {faculties});
 };
 
+facultiesCtrl.viewFaculties = async (req, res) => {
+  const faculties = await Faculty.find().lean();
+  res.render('faculties/view-faculties', {faculties});
+};
+
 facultiesCtrl.renderEditForm = async (req, res) => {
   const faculty = await Faculty.findById(req.params.id).lean();
   res.render('faculties/edit-faculty', {faculty});
@@ -42,6 +47,13 @@ facultiesCtrl.searchFaculties = async (req, res) => {
   const query = {name: {$regex: search, $options: 'i'}};
   const faculties = await Faculty.find(query).lean();
   res.render('faculties/all-faculties', {faculties});
+};
+
+facultiesCtrl.searcherFaculties = async (req, res) => {
+  const {search} = req.body;
+  const query = {name: {$regex: search, $options: 'i'}};
+  const faculties = await Faculty.find(query).lean();
+  res.render('faculties/view-faculties', {faculties});
 };
 
 module.exports = facultiesCtrl;
