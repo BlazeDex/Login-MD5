@@ -5,13 +5,13 @@
     <div class="card-body">
         <form id="subjectForm" action="/subjects/new-subject" method="POST">
             <div class="form-group">
-                <input type="text" name="name" class="form-control" placeholder="Name" autofocus>
+                <input type="text" name="name" class="form-control" placeholder="Nombre" autofocus>
             </div>
             <div class="form-group">
-                <textarea name="description" placeholder="Description" class="form-control"></textarea>
+                <textarea name="description" placeholder="Descripcion" class="form-control"></textarea>
             </div>
             <div class="form-group">
-                <input type="number" name="hours" placeholder="Hours" class="form-control">
+                <input type="number" name="hours" placeholder="Horas" class="form-control">
             </div>
             <div class="form-group">
                 <button class="btn btn-primary btn-block" type="submit">
@@ -32,6 +32,9 @@
         if (titleInput.value.trim() === '' || descriptionInput.value.trim() === '' || hoursInput.value.trim() === '') {
             event.preventDefault();
             Swal.fire('Error', '¡Hay algunos campos vacíos!', 'error');
+        } else if(hoursInput.value.trim() <= 2) {
+            event.preventDefault();
+            Swal.fire('Error', '¡La asginatura debe tener al menos 3 horas!', 'error');
         }
     });
 </script>

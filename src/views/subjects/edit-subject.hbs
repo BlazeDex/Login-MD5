@@ -35,6 +35,9 @@
         if (titleInput.value.trim() === '' || descriptionInput.value.trim() === '' || hoursInput.value.trim() === '') {
             event.preventDefault();
             Swal.fire('Error', '¡Hay algunos campos vacíos!', 'error');
+        } else if(hoursInput.value.trim() <= 3) {
+            event.preventDefault();
+            Swal.fire('Error', '¡La asginatura debe tener al menos 3 horas!', 'error');
         }
     });
 </script>

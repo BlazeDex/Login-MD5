@@ -35,6 +35,9 @@
         if (titleInput.value.trim() === '' || descriptionInput.value.trim() === '' || durationInput.value.trim() === '') {
             event.preventDefault();
             Swal.fire('Error', '¡Hay algunos campos vacíos!', 'error');
+        } else if(durationInput.value.trim() <= 7) {
+            event.preventDefault();
+            Swal.fire('Error', '¡La asginatura debe tener al menos 8 semestres!', 'error');
         }
     });
 </script>
